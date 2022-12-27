@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/providers/products.dart';
 
 import '../models/product.dart';
 import "./product_item.dart";
 
 class ProductsGrid extends StatelessWidget {
-  const ProductsGrid({
-    Key? key,
-    required this.loadedProducts,
-  }) : super(key: key);
-
-  final List<Product> loadedProducts;
-
   @override
   Widget build(BuildContext context) {
+    final productsData = Provider.of<Products>(context);
+    final products = productsData.items;
     return GridView.builder(
       padding: const EdgeInsets.all(10.0),
-      itemCount: loadedProducts.length,
+      itemCount: products.length,
       itemBuilder: (ctx, i) => ProductItem(
-        loadedProducts[i].id,
-        loadedProducts[i].title,
-        loadedProducts[i].imageUrl,
+        products[i].id,
+        products[i].title,
+        products[i].imageUrl,
       ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
