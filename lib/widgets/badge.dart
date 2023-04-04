@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Badge extends StatelessWidget {
+class Badge extends StatefulWidget {
   const Badge({
     Key? key,
     required this.child,
@@ -13,11 +13,16 @@ class Badge extends StatelessWidget {
   final Color? color;
 
   @override
+  State<Badge> createState() => _BadgeState();
+}
+
+class _BadgeState extends State<Badge> {
+  @override
   Widget build(BuildContext context) {
     return Stack(
       alignment: Alignment.center,
       children: [
-        child,
+        widget.child,
         Positioned(
           right: 8,
           top: 8,
@@ -26,14 +31,16 @@ class Badge extends StatelessWidget {
             // color: Theme.of(context).accentColor,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: color != null ? color : Theme.of(context).accentColor,
+              color: widget.color != null
+                  ? widget.color
+                  : Theme.of(context).accentColor,
             ),
             constraints: BoxConstraints(
               minWidth: 16,
               minHeight: 16,
             ),
             child: Text(
-              value,
+              widget.value,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 10,
